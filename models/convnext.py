@@ -106,9 +106,9 @@ class ConvNeXt(nn.Module):
     def _init_weights(self, pretrained: str = None) -> None:
         if pretrained:
             try:
-                self.load_state_dict(torch.load(pretrained, map_location='cpu')['model'])
+                self.load_state_dict(torch.load(pretrained, map_location='cpu'))
             except RuntimeError:
-                pretrained_dict = torch.load(pretrained, map_location='cpu')['model']
+                pretrained_dict = torch.load(pretrained, map_location='cpu')
                 pretrained_dict.popitem()   # remove bias
                 pretrained_dict.popitem()   # remove weight
                 self.load_state_dict(pretrained_dict, strict=False)
